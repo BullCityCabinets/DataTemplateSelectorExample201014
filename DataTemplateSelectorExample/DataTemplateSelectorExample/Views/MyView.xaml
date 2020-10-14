@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DataTemplateSelectorExample.Views.MyView"
+             
+             xmlns:datatemplates="clr-namespace:DataTemplateSelectorExample.Views.DataTemplates">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <datatemplates:DT1/>
+                <datatemplates:DT2/>
+                <!-- This is the filename name, right? -->
+                <!-- Intellisense can't find these     -->
+            </ResourceDictionary.MergedDictionaries>
+
+            <datatemplates:DTSelector x:Key="dTSelector"        
+                DT1ref = "{StaticResource DT1key}"
+                DT2ref = "{StaticResource DT2key}"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <Label Text="{Binding UserA.Name}"/>
+            <Label Text="{Binding UserA.MyPref}"/>
+
+            <CollectionView
+                ItemsSource="{Binding MyClasses}"
+                ItemTemplate="{StaticResource dTSelector}">
+
+            </CollectionView>
+
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
